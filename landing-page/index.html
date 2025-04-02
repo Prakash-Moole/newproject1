@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillshare - Learn, Teach, Grow Together</title>
+    <!-- Link Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --primary-color: #644ce4; /* Skillshare Purple/Blue */
+            --secondary-color: #ffffff;
+            --text-dark: #333;
+            --text-light: #555;
+            --background-light: #f8f8fA;
+            --border-color: #ddd;
+            --star-color: #ffc107; /* Yellow for stars */
+            --card-background: #ffffff;
+            --footer-background: #232340; /* Dark footer background */
+            --footer-text: #ccc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block; /* Remove bottom space */
+        }
+
+        h1, h2, h3, h4 {
+            line-height: 1.3;
+            margin-bottom: 0.8em;
+        }
+
+        h1 { font-size: 3rem; font-weight: 700; }
+        h2 { font-size: 2rem; font-weight: 600; text-align: center; margin-bottom: 1.5em; }
+        h3 { font-size: 1.4rem; font-weight: 600; }
+        h4 { font-size: 1.1rem; font-weight: 600; }
+
+        p {
+            margin-bottom: 1em;
+            color: var(--text-light);
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #503dbb; /* Darker shade */
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f5f3ff; /* Light purple tint */
+        }
+
+        .btn-signin { /* Specific style for Sign In */
+            border: none;
+            color: var(--text-dark);
+            padding: 12px 15px; /* Slightly less padding */
+        }
+        .btn-signin:hover {
+             background-color: #eee;
+        }
+
+
+        .btn-large {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+        }
+
+        .btn-enroll {
+            width: 100%; /* Make enroll button full width */
+            margin-top: auto; /* Push to bottom of card */
+            padding: 10px 20px;
+        }
+
+
+        /* --- Header --- */
+        .site-header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: sticky; /* Optional: make header sticky */
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .main-nav ul {
+            display: flex;
+        }
+
+        .main-nav ul li {
+            margin-left: 25px;
+        }
+
+        .main-nav ul li a {
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-actions .btn {
+            margin-left: 15px;
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            background: linear-gradient(120deg, #f8f8ff, #fff); /* Subtle gradient background */
+            padding: 80px 0;
+            overflow: hidden; /* To contain the image if needed */
+            /* Add padding-top if using sticky header */
+            /* padding-top: calc(80px + 60px); Adjust 60px based on actual header height */
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            gap: 40px; /* Space between text and image */
+        }
+
+        .hero-content {
+            flex: 1; /* Take available space */
+            max-width: 50%;
+        }
+
+        .hero-content h1 {
+            margin-bottom: 0.5em;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5em;
+            max-width: 500px; /* Limit paragraph width */
+        }
+
+        .hero-buttons .btn {
+            margin-right: 15px;
+        }
+        .hero-buttons .btn:last-child {
+            margin-right: 0;
+        }
+
+        .hero-image {
+            flex: 1; /* Take available space */
+            display: flex;
+            justify-content: center; /* Center image within its container */
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px; /* Rounded corners for illustration */
+        }
+
+
+        /* --- Features Section --- */
+        .features-section {
+            background-color: var(--background-light);
+        }
+
+        .features-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            flex: 1; /* Equal width */
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            /* Styling the icon background like the image */
+            background-color: #f0edff;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+        }
+
+        /* --- Explore Skills Section --- */
+        .category-container {
+            display: grid; /* Use grid for potentially uneven rows */
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive grid */
+            gap: 30px;
+        }
+
+        .category-card {
+            background-color: var(--card-background);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .category-card:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-icon {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+             /* Styling the icon background like the image */
+            background-color: #f0edff;
+            width: 60px;
+            height: 60px;
+            border-radius: 10px; /* Squared icon background */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-card h3 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .category-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+
+
+        /* --- Trending Skills Section --- */
+        .course-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .course-card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            overflow: hidden; /* Clip image corners */
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            flex: 1; /* Equal width */
+            padding-bottom: 20px; /* Add padding for button */
+        }
+
+        .course-card img {
+            width: 100%;
+            height: 200px; /* Fixed height for course images */
+            object-fit: cover; /* Crop images nicely */
+        }
+
+        .course-card h3,
+        .course-card p,
+        .course-rating {
+            padding: 0 20px; /* Padding for text content */
+        }
+
+        .course-card h3 {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        .course-card p {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            flex-grow: 1; /* Allow description to push rating down */
+        }
+
+        .course-rating {
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .course-rating .fa-star {
+            color: var(--star-color);
+            margin-left: 5px;
+        }
+
+        .course-card .btn-enroll {
+             margin-left: 20px;
+             margin-right: 20px;
+             width: calc(100% - 40px); /* Adjust width considering padding */
+        }
+
+        /* --- Success Stories Section --- */
+        .success-stories-section {
+            background-color: var(--background-light);
+        }
+
+        .testimonial-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            flex: 1; /* Equal width */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .testimonial-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #fff; /* Optional border */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-card h4 {
+            margin-bottom: 2px;
+        }
+
+        .testimonial-title {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card blockquote {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+            border-left: 3px solid var(--primary-color); /* Subtle quote indicator */
+            padding-left: 15px;
+            text-align: left;
+        }
+
+        /* --- Footer --- */
+        .site-footer {
+            background-color: var(--footer-background);
+            color: var(--footer-text);
+            padding: 50px 0 0; /* Padding top only for main content */
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+            gap: 30px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #444; /* Separator line */
+        }
+
+        .footer-about .logo {
+            color: #fff; /* White logo in footer */
+            margin-bottom: 15px;
+        }
+
+        .footer-about p {
+            color: var(--footer-text);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .footer-links h4,
+        .footer-connect h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: var(--footer-text);
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: #fff;
+        }
+
+        .social-icons a {
+            color: var(--footer-text);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:last-child {
+            margin-right: 0;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .copyright p {
+            margin-bottom: 0;
+        }
+
+        /* --- Basic Responsiveness (Example) --- */
+        @media (max-width: 992px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-content {
+                max-width: 100%;
+                order: 2; /* Text below image */
+            }
+            .hero-image {
+                order: 1; /* Image above text */
+                margin-bottom: 30px;
+            }
+             .hero-content p {
+                 margin-left: auto;
+                 margin-right: auto;
+            }
+            .features-container,
+            .course-container,
+            .testimonial-container {
+                flex-direction: column;
+                align-items: center;
+            }
+             .feature-card, .course-card, .testimonial-card {
+                width: 80%;
+                max-width: 400px; /* Limit card width on smaller screens */
+            }
+            .header-container {
+                flex-wrap: wrap; /* Allow header items to wrap */
+                justify-content: center;
+            }
+            .main-nav {
+                 order: 3; /* Move nav below logo/actions */
+                 width: 100%;
+                 margin-top: 10px;
+            }
+            .main-nav ul {
+                justify-content: center;
+            }
+            .main-nav ul li {
+                margin: 0 10px;
+            }
+            .header-actions {
+                 margin-top: 10px;
+            }
+        }
+
+         @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            .btn-large {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+             .footer-container {
+                 grid-template-columns: 1fr; /* Stack footer columns */
+                 text-align: center;
+             }
+             .social-icons {
+                 justify-content: center;
+             }
+              .social-icons a {
+                 margin: 0 10px;
+             }
+         }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">Skill Swap</div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#">Browse</a></li>
+                    <li><a href="#">Teach</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" class="btn btn-secondary btn-signin">Sign In</a>
+                <a href="#" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <h1>Learn, Teach, Grow Together</h1>
+                    <p>Join our community of learners and teachers. Share your skills, learn from others, and grow together in a supportive environment.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary btn-large">Start Learning</a>
+                        <a href="#" class="btn btn-secondary btn-large">Become a Teacher</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <!-- Placeholder for the illustration -->
+                    <img src="../div (1).png" alt="Group of people learning together">
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="container features-container">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h3>Direct Skill Exchange</h3>
+                    <p>Exchange your expertise with others in our unique skill-sharing marketplace.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-user-graduate"></i></div>
+                    <h3>Personalized Learning</h3>
+                    <p>Learn at your own pace with customized learning paths and mentorship.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <h3>Community-Driven</h3>
+                    <p>Join a vibrant community of learners and teachers supporting each other.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explore Skills Section -->
+        <section class="explore-skills-section">
+            <div class="container">
+                <h2>Explore Skills by Category</h2>
+                <div class="category-container">
+                    <div class="category-card">
+                        <div class="category-icon"><i class="fas fa-palette"></i></div>
+                        <h3>Arts & Design</h3>
+                        <p>1200+ courses</p>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon"><i class="fas fa-code"></i></div>
+                        <h3>Programming</h3>
+                        <p>800+ courses</p>
+                    </div>
+                    <div class="category-card">
+                        <!-- Assuming 'AZ' icon represents Languages -->
+                        <div class="category-icon"><i class="fas fa-language"></i></div>
+                        <h3>Languages</h3>
+                        <p>500+ courses</p>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon"><i class="fas fa-music"></i></div>
+                        <h3>Music</h3>
+                        <p>600+ courses</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Skills Section -->
+        <section class="trending-skills-section">
+            <div class="container">
+                <h2>Trending Skills</h2>
+                <div class="course-container">
+                    <div class="course-card">
+                        <img src="../img (7).png" alt="Digital Photography Course">
+                        <h3>Digital Photography Masterclass</h3>
+                        <p>Learn professional photography techniques</p>
+                        <div class="course-rating">
+                            <span>4.8</span> <i class="fas fa-star"></i>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-enroll">Enroll Now</a>
+                    </div>
+                    <div class="course-card">
+                        <img src="../img (8).png" alt="Web Development Course">
+                        <h3>Web Development Fundamentals</h3>
+                        <p>Master HTML, CSS, and JavaScript</p>
+                         <div class="course-rating">
+                            <span>4.9</span> <i class="fas fa-star"></i>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-enroll">Enroll Now</a>
+                    </div>
+                    <div class="course-card">
+                        <img src="../img (9).png" alt="Business Leadership Course">
+                        <h3>Business Leadership</h3>
+                        <p>Develop essential leadership skills</p>
+                         <div class="course-rating">
+                            <span>4.7</span> <i class="fas fa-star"></i>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-enroll">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Stories Section -->
+        <section class="success-stories-section">
+            <div class="container">
+                <h2>Success Stories</h2>
+                <div class="testimonial-container">
+                    <div class="testimonial-card">
+                        <img src="../profile.jpg" alt="Sarah Johnson" class="testimonial-img">
+                        <h4>Sarah Johnson</h4>
+                        <p class="testimonial-title">Digital Artist</p>
+                        <blockquote>"The skill exchange platform helped me turn my passion for digital art into a thriving career. The community support is amazing!"</blockquote>
+                    </div>
+                    <div class="testimonial-card">
+                        <img src="../profile.jpg" alt="Michael Chen" class="testimonial-img">
+                        <h4>Michael Chen</h4>
+                        <p class="testimonial-title">Software Developer</p>
+                        <blockquote>"I learned coding through peer-to-peer teaching, and now I'm helping others achieve their tech dreams. It's a fantastic cycle of growth!"</blockquote>
+                    </div>
+                    <div class="testimonial-card">
+                        <img src="../profile.jpg" alt="Emma Davis" class="testimonial-img">
+                        <h4>Emma Davis</h4>
+                        <p class="testimonial-title">Language Teacher</p>
+                        <blockquote>"Teaching languages while learning photography has been an incredible journey. The platform makes skill exchange so seamless!"</blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-about">
+                <div class="logo">Skill Swap</div>
+                <p>Empowering people to share knowledge and learn from each other.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-connect">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container copyright">
+            <p>© 2025 Skillshare. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // JavaScript to change header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.site-header');
+            if (window.scrollY > 50) { // Adjust the scroll position as needed
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)'; // Semi-transparent white
+                header.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)'; // Add a subtle shadow
+            } else {
+                header.style.backgroundColor = '#fff'; // Original background
+                header.style.boxShadow = 'none'; // Remove shadow
+            }
+        });
+    </script>
+
+</body>
+</html>

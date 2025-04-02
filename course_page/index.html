@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Fundamentals - Skill share</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --primary-color: #644ce4; /* Skillshare Purple/Blue */
+            --secondary-color: #ffffff;
+            --text-dark: #333;
+            --text-light: #555;
+            --background-light: #f8f8fA;
+            --border-color: #ddd;
+            --star-color: #ffc107; /* Yellow for stars */
+            --card-background: #ffffff;
+            --footer-background: #232340; /* Dark footer background */
+            --footer-text: #ccc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block; /* Remove bottom space */
+        }
+
+        h1, h2, h3, h4 {
+            line-height: 1.3;
+            margin-bottom: 0.8em;
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 700; }
+        h2 { font-size: 1.8rem; font-weight: 600; margin-bottom: 1.2em; }
+        h3 { font-size: 1.4rem; font-weight: 600; }
+        h4 { font-size: 1.1rem; font-weight: 600; }
+
+        p {
+            margin-bottom: 1em;
+            color: var(--text-light);
+        }
+
+        section {
+            padding: 40px 0;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #503dbb; /* Darker shade */
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f5f3ff; /* Light purple tint */
+        }
+
+        .btn-signin { /* Specific style for Sign In */
+            border: none;
+            color: var(--text-dark);
+            padding: 12px 15px; /* Slightly less padding */
+        }
+        .btn-signin:hover {
+             background-color: #eee;
+        }
+
+
+        .btn-large {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+        }
+
+        .btn-enroll {
+            width: 100%; /* Make enroll button full width */
+            margin-top: auto; /* Push to bottom of card */
+            padding: 10px 20px;
+        }
+
+
+        /* --- Header --- */
+        .site-header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: sticky; /* Optional: make header sticky */
+            top: 0;
+            z-index: 100;
+            transition: background-color 0.3s ease; /* Smooth transition for background */
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .main-nav ul {
+            display: flex;
+        }
+
+        .main-nav ul li {
+            margin-left: 25px;
+        }
+
+        .main-nav ul li a {
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-actions .btn {
+            margin-left: 15px;
+        }
+
+        /* --- Search Bar --- */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px 15px;
+            margin-right: 20px;
+            flex: 1; /* Take up available space */
+        }
+
+        .search-bar input[type="text"] {
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            width: 100%;
+            margin-left: 10px;
+        }
+
+        .search-bar i {
+            color: var(--text-light);
+        }
+
+        /* --- User Actions (Notifications, Profile) --- */
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-actions i {
+            font-size: 1.3rem;
+            margin-left: 20px;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        .user-actions img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-left: 20px;
+            object-fit: cover;
+        }
+
+        /* --- Course Overview Section --- */
+        .course-overview {
+            display: grid;
+            grid-template-columns: 1fr 350px; /* Image and details side-by-side */
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .course-thumbnail {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .course-thumbnail img {
+            width: 100%;
+            height: 300px; /* Fixed height */
+            object-fit: cover;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            padding: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .play-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .course-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .course-rating {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .course-rating .fa-star {
+            color: var(--star-color);
+            margin-left: 5px;
+        }
+
+        .course-rating span {
+            margin-right: 10px;
+        }
+
+        .course-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .course-info i {
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+
+        .enroll-now-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .enroll-now-price .btn {
+            width: auto;
+        }
+
+        .course-details-list {
+            margin-bottom: 20px;
+        }
+
+        .course-details-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .course-details-list i {
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+
+        .next-sessions {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .next-sessions h4 {
+            margin-bottom: 15px;
+        }
+
+        .session-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .session-item:last-child {
+            border-bottom: none;
+        }
+
+        .session-item i {
+            color: var(--text-light);
+        }
+
+        /* --- Course Description Section --- */
+        .course-description-section {
+            margin-bottom: 40px;
+        }
+
+        .course-description-section h3 {
+            margin-bottom: 15px;
+        }
+
+        .course-description-section p {
+            margin-bottom: 15px;
+        }
+
+        .prerequisites ul,
+        .learning-outcomes ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .prerequisites li,
+        .learning-outcomes li {
+            margin-bottom: 5px;
+            list-style-type: disc;
+            color: var(--text-light);
+        }
+
+        /* --- Instructor Section --- */
+        .instructor-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .instructor-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .instructor-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .instructor-info p {
+            margin-bottom: 8px;
+        }
+
+        .instructor-social a {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        /* --- Student Reviews Section --- */
+        .student-reviews-section {
+            margin-bottom: 40px;
+        }
+
+        .review-card {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .review-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .review-content h4 {
+            margin-bottom: 5px;
+        }
+
+        .review-content p {
+            font-size: 0.95rem;
+        }
+
+        .review-stars .fa-star {
+            color: var(--star-color);
+            margin-right: 2px;
+        }
+
+        /* --- Course Resources Section --- */
+        .course-resources-section {
+            margin-bottom: 40px;
+        }
+
+        .resource-link {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            transition: background-color 0.2s ease;
+        }
+
+        .resource-link:hover {
+            background-color: var(--background-light);
+        }
+
+        .resource-link i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        /* --- Basic Responsiveness (Example) --- */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .main-nav {
+                 order: 3; /* Move nav below logo/actions */
+                 width: 100%;
+                 margin-top: 10px;
+            }
+            .main-nav ul {
+                justify-content: center;
+            }
+            .main-nav ul li {
+                margin: 0 10px;
+            }
+            .header-actions {
+                 margin-top: 10px;
+            }
+            .search-bar {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .course-overview {
+                grid-template-columns: 1fr;
+            }
+        }
+
+         @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.6rem; }
+            .btn-large {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+             .footer-container {
+                 grid-template-columns: 1fr; /* Stack footer columns */
+                 text-align: center;
+             }
+             .social-icons {
+                 justify-content: center;
+             }
+              .social-icons a {
+                 margin: 0 10px;
+             }
+         }
+         .course-thumbnail {
+    width: 700px; /* Set width */
+    height: 600px; /* Set height */
+    position: relative;
+    overflow: hidden; /* Prevents image overflow */
+    border-radius: 10px; /* Optional: adds rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a slight shadow */
+}
+
+.course-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    border-radius: 10px; /* Matches div rounding */
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    color: white;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.play-button i {
+    font-size: 1.5rem;
+}
+
+.play-button:hover {
+    background: rgba(0, 0, 0, 0.8); /* Darker on hover */
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">Skill Swap</div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for skills, instructors, or lessons...">
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#">Browse</a></li>
+                    <li><a href="#">Teach</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <i class="fas fa-bell"></i>
+                <img src="../profile.jpg" alt="User Profile">
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Course Overview Section -->
+        <section class="course-overview">
+            <div class="course-thumbnail">
+                <img src="../img (6).png" alt="Course Thumbnail">
+                <div class="play-button" id="playButton">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            <div class="course-details">
+                <h1 class="course-title">Web Development Fundamentals</h1>
+                <div class="course-rating">
+                    <span>4.8</span> <i class="fas fa-star"></i> <span class="review-count">(234 reviews)</span> <span class="student-count">1,234 students</span>
+                </div>
+                <div class="enroll-now-price">
+                    <a href="#" class="btn btn-primary">Enroll Now</a>
+                    <span>$49.99</span>
+                </div>
+                <ul class="course-details-list">
+                    <li><i class="fas fa-clock"></i> 12 weeks course</li>
+                    <li><i class="fas fa-video"></i> 24 live sessions</li>
+                    <li><i class="fas fa-file-alt"></i> Course materials included</li>
+                    <li><i class="fas fa-certificate"></i> Certificate of completion</li>
+                </ul>
+                <div class="next-sessions">
+                    <h4>Next Available Sessions</h4>
+                    <div class="session-item">
+                        <span>Monday</span>
+                        <span>9:00 AM - 11:00 AM <i class="fas fa-calendar-alt"></i></span>
+                    </div>
+                    <div class="session-item">
+                        <span>Wednesday</span>
+                        <span>2:00 PM - 4:00 PM <i class="fas fa-calendar-alt"></i></span>
+                    </div>
+                    <div class="session-item">
+                        <span>Friday</span>
+                        <span>6:00 PM - 8:00 PM <i class="fas fa-calendar-alt"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Description Section -->
+        <section class="course-description-section">
+            <h3>Course Description</h3>
+            <p>Learn the fundamentals of web development from scratch. This comprehensive course covers HTML, CSS, JavaScript, and modern web development practices.</p>
+            <h3>Prerequisites</h3>
+            <ul class="prerequisites">
+                <li>Basic computer skills</li>
+                <li>Understanding of internet basics</li>
+                <li>No prior coding experience required</li>
+            </ul>
+            <h3>Learning Outcomes</h3>
+            <ul class="learning-outcomes">
+                <li>Build responsive websites from scratch</li>
+                <li>Understand core web development concepts</li>
+                <li>Create interactive web applications</li>
+                <li>Deploy websites to production</li>
+            </ul>
+        </section>
+
+        <!-- Instructor Section -->
+        <section class="instructor-section">
+            <img src="../profile.jpg" alt="John Smith" class="instructor-img">
+            <div class="instructor-info">
+                <h4>John Smith</h4>
+                <p>Senior Web Developer & Instructor</p>
+                <p>10+ years of experience in web development and teaching. Passionate about helping others learn to code.</p>
+                <div class="instructor-social">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Student Reviews Section -->
+        <section class="student-reviews-section">
+            <h2>Student Reviews</h2>
+            <div class="review-card">
+                <img src="../profile.jpg" alt="Michael Brown" class="review-img">
+                <div class="review-content">
+                    <h4>Michael Brown</h4>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>Excellent course! The instructor explains everything clearly and the practical exercises really helped solidify the concepts.</p>
+                </div>
+            </div>
+            <div class="review-card">
+                <img src="../profile.jpg" alt="Lisa Anderson" class="review-img">
+                <div class="review-content">
+                    <h4>Lisa Anderson</h4>
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <p>Great introduction to web development. The course structure is well thought out and the pace is perfect for beginners.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Resources Section -->
+        <section class="course-resources-section">
+            <h2>Course Resources</h2>
+            <a href="#" class="resource-link">
+                <i class="fas fa-file-alt"></i> Course Syllabus
+            </a>
+            <a href="#" class="resource-link">
+                <i class="fas fa-file-alt"></i> Lecture Slides
+            </a>
+            <a href="#" class="resource-link">
+                <i class="fas fa-code"></i> Code Examples
+            </a>
+            <a href="#" class="resource-link">
+                <i class="fas fa-file-alt"></i> Assignment Guidelines
+            </a>
+        </section>
+
+    </main>
+
+    <script>
+        // JavaScript for video play button
+        const playButton = document.getElementById('playButton');
+
+        if (playButton) {
+            playButton.addEventListener('click', function() {
+                // Replace with actual video display logic
+                alert('Video Playback would start here!'); // Placeholder action
+                // You'd typically:
+                // 1. Hide the playButton:  playButton.style.display = 'none';
+                // 2. Show the video element (if you had one).
+            });
+        }
+    </script>
+</body>
+</html>

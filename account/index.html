@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap - Profile & Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --primary-color: #6200EE; /* SkillSwap Purple */
+            --secondary-color: #ffffff;
+            --text-dark: #333;
+            --text-light: #555;
+            --background-light: #f8f8fA;
+            --border-color: #ddd;
+            --star-color: #ffc107; /* Yellow for stars */
+            --card-background: #ffffff;
+            --footer-background: #121212; /* Dark footer background */
+            --footer-text: #ccc;
+            --progress-bar-fill: #4CAF50; /* Green for progress */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        h1, h2, h3, h4 {
+            line-height: 1.3;
+            margin-bottom: 0.8em;
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 700; }
+        h2 { font-size: 1.8rem; font-weight: 600; margin-bottom: 1.2em; }
+        h3 { font-size: 1.4rem; font-weight: 600; }
+        h4 { font-size: 1.1rem; font-weight: 600; }
+
+        p {
+            margin-bottom: 1em;
+            color: var(--text-light);
+        }
+
+        section {
+            padding: 20px 0;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            color: var(--secondary-color);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #4a00e0; /* Darker shade */
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 250px;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar-profile {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-profile h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-profile p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .sidebar-nav ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 8px;
+            color: var(--text-dark);
+            transition: background-color 0.2s ease;
+            width: 100%;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background-color: var(--background-light);
+        }
+
+        .sidebar-nav i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* --- Main Content Area --- */
+        .main-content {
+            flex: 1;
+        }
+
+        /* --- "How would you like to use SkillSwap?" Section --- */
+        .how-to-use-section {
+            margin-bottom: 30px;
+        }
+
+        .how-to-use-cards {
+            display: flex;
+            gap: 20px;
+        }
+
+        .how-to-use-card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .how-to-use-card:hover {
+            background-color: var(--background-light);
+        }
+
+        .how-to-use-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .how-to-use-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .how-to-use-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* --- Suggested for You Section --- */
+        .suggested-section {
+            margin-bottom: 30px;
+        }
+
+        .suggested-cards {
+            display: flex;
+            gap: 20px;
+        }
+
+        .suggested-card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+
+        .suggested-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .suggested-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .suggested-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* --- My Courses Section --- */
+        .my-courses-section {
+            margin-bottom: 30px;
+        }
+
+        .course-card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .course-card i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .course-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar-container {
+            background-color: var(--border-color);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--progress-bar-fill);
+            width: 60%; /* Example: 60% progress */
+        }
+
+        /* --- User Profile Section --- */
+        .user-profile-section {
+            margin-bottom: 30px;
+        }
+
+        .user-profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .user-profile-header img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .user-profile-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .user-profile-info p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .user-profile-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .skill-tag {
+            background-color: var(--background-light);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .user-profile-achievements {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .achievement-item {
+            text-align: center;
+        }
+
+        .achievement-item i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .achievement-item p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .user-profile-reviews {
+            margin-bottom: 20px;
+        }
+
+        .review-item {
+            margin-bottom: 15px;
+        }
+
+        .review-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .review-item p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .review-item .fa-star {
+            color: var(--star-color);
+            margin-right: 2px;
+        }
+
+        /* --- Settings Section --- */
+        .settings-section {
+            margin-bottom: 30px;
+        }
+
+        .account-settings-section,
+        .notification-preferences-section,
+        .payment-settings-section {
+            margin-bottom: 20px;
+        }
+
+        .settings-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .change-password-link {
+            color: var(--primary-color);
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .notification-preferences-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-preferences-section p {
+            margin-bottom: 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background-color: var(--border-color);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-switch::before {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background-color: var(--primary-color);
+        }
+
+        .toggle-switch.active::before {
+            transform: translateX(20px);
+        }
+
+        .payment-settings-section .payment-method {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .payment-settings-section .payment-method i {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+
+        .payment-settings-section .remove-link {
+            color: #f44336; /* Red for remove */
+            cursor: pointer;
+        }
+
+        .add-payment-method-link {
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .add-payment-method-link i {
+            margin-right: 5px;
+        }
+
+        /* --- Basic Responsiveness (Example) --- */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-profile">
+                <img src="../profile.jpg ">
+               <h3>Sneha</h3>
+                <p>Premium Member</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-book"></i> My Courses</a></li>
+                    <li><a href="#"><i class="fas fa-coins"></i> Earnings</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> Community</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <!-- "How would you like to use SkillSwap?" Section -->
+            <section class="how-to-use-section">
+                <h2 style="text-align: center;">How would you like to use SkillSwap?</h2>
+                <div class="how-to-use-cards">
+                    <div class="how-to-use-card" data-action="learn">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Learn</h3>
+                        <p>Discover new skills from expert teachers</p>
+                    </div>
+                    <div class="how-to-use-card" data-action="teach">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3>Teach</h3>
+                        <p>Share your expertise with others</p>
+                    </div>
+                    <div class="how-to-use-card" data-action="both">
+                        <i class="fas fa-sync-alt"></i>
+                        <h3>Both</h3>
+                        <p>Learn and teach in our community</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Suggested for You Section -->
+            <section class="suggested-section">
+                <h2>Suggested for You</h2>
+                <div class="suggested-cards">
+                    <div class="suggested-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Web Development</h3>
+                        <p>Learn modern web development techniques</p>
+                    </div>
+                    <div class="suggested-card">
+                        <i class="fas fa-camera"></i>
+                        <h3>Photography</h3>
+                        <p>Master digital photography skills</p>
+                    </div>
+                    <div class="suggested-card">
+                        <i class="fas fa-language"></i>
+                        <h3>Languages</h3>
+                        <p>Start learning a new language today</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Courses Section -->
+            <section class="my-courses-section">
+                <h2>My Courses</h2>
+                <div class="course-card">
+                    <i class="fas fa-code"></i>
+                    <h3>JavaScript Fundamentals</h3>
+                    <p>Progress: 60%</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" style="width: 60%;"></div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <i class="fas fa-camera"></i>
+                    <h3>Digital Photography</h3>
+                    <p>Progress: 30%</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" style="width: 30%;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Profile Section -->
+            <section class="user-profile-section">
+                <div class="user-profile-header">
+                    <img src="../profile.jpg"Sneha">
+                    <div class="user-profile-info">
+                        <h3>Sneha</h3>
+                        <p>Web Development Teacher & UX Designer</p>
+                    </div>
+                </div>
+                <div class="user-profile-skills">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">UI Design</span>
+                    <span class="skill-tag">UX Research</span>
+                </div>
+                <div class="user-profile-achievements">
+                    <div class="achievement-item">
+                        <i class="fas fa-star"></i>
+                        <p>Top Rated</p>
+                    </div>
+                    <div class="achievement-item">
+                        <i class="fas fa-medal"></i>
+                        <p>Expert</p>
+                    </div>
+                    <div class="achievement-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Verified</p>
+                    </div>
+                </div>
+                <div class="user-profile-reviews">
+                    <h4>Reviews</h4>
+                    <div class="review-item">
+                        <img src="../profile.jpg" alt="Mike Johnson">
+                        <p>Excellent teacher! Clear explanations and very patient.</p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+</body>
+</html>

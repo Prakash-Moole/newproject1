@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Swap- Learning for All Ages and Stages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --primary-color: #644ce4; /* EduAll Purple */
+            --secondary-color: #ffffff;
+            --text-dark: #333;
+            --text-light: #555;
+            --background-light: #f8f8fA;
+            --border-color: #ddd;
+            --star-color: #ffc107; /* Yellow for stars */
+            --card-background: #ffffff;
+            --footer-background: #121212; /* Dark footer background */
+            --footer-text: #ccc;
+            --progress-bar-fill: #4CAF50; /* Green for progress */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block; /* Remove bottom space */
+        }
+
+        h1, h2, h3, h4 {
+            line-height: 1.3;
+            margin-bottom: 0.8em;
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 700; }
+        h2 { font-size: 1.8rem; font-weight: 600; margin-bottom: 1.2em; }
+        h3 { font-size: 1.4rem; font-weight: 600; }
+        h4 { font-size: 1.1rem; font-weight: 600; }
+
+        p {
+            margin-bottom: 1em;
+            color: var(--text-light);
+        }
+
+        section {
+            padding: 40px 0;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #644ce4; /* Darker shade */
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f5f3ff; /* Light purple tint */
+        }
+
+        /* --- Header --- */
+        .site-header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .main-nav ul {
+            display: flex;
+        }
+
+        .main-nav ul li {
+            margin-left: 25px;
+        }
+
+        .main-nav ul li a {
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-actions i {
+            font-size: 1.3rem;
+            margin-left: 20px;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        .user-actions img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-left: 20px;
+            object-fit: cover;
+        }
+
+        /* --- Hero Section (Choose Your Learning Path) --- */
+        .hero-section {
+            background: linear-gradient(to right, #5a31ca, #644ce4); /* Gradient background */
+            padding: 50px 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero-section h2 {
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .learning-path-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+        }
+
+        .learning-path-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            width: 180px; /* Fixed width */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .learning-path-card:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .learning-path-card i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .learning-path-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .learning-path-card p {
+            font-size: 0.9rem;
+        }
+
+        /* --- Featured Learning Videos Section --- */
+        .featured-videos-section {
+            margin-bottom: 40px;
+        }
+
+        .video-cards-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+        }
+
+        .video-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px; /* Fixed width */
+            transition: transform 0.2s ease;
+            position: relative; /* For the play button and labels */
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .video-card .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            padding: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .video-card .play-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .video-card-content {
+            padding: 15px;
+        }
+
+        .video-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .video-card-info {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .video-card-info i {
+            margin-right: 5px;
+        }
+
+        .video-card-rating {
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .video-card-rating .fa-star {
+            color: var(--star-color);
+            margin-left: 3px;
+        }
+
+        .video-card-labels {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .video-card-label {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        /* --- Learning Achievement Center Section --- */
+        .achievement-center-section {
+            margin-bottom: 40px;
+        }
+
+        .achievement-center-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap; /* Allow sections to wrap */
+        }
+
+        .achievement-section {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1; /* Equal width */
+            min-width: 250px; /* Minimum width for responsiveness */
+        }
+
+        .achievement-section h3 {
+            margin-bottom: 15px;
+        }
+
+        /* --- Top Learners --- */
+        .top-learners-list {
+            list-style: none;
+        }
+
+        .top-learner-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .top-learner-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .top-learner-name {
+            font-weight: 600;
+        }
+
+        .top-learner-points {
+            margin-left: auto;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* --- Recent Badges --- */
+        .recent-badges-list {
+            display: flex;
+            gap: 15px;
+        }
+
+        .badge-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        /* --- Active Challenges --- */
+        .active-challenges-list {
+            list-style: none;
+        }
+
+        .challenge-item {
+            margin-bottom: 15px;
+        }
+
+        .challenge-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar-container {
+            background-color: var(--border-color);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--progress-bar-fill);
+            width: 70%; /* Example: 70% progress */
+        }
+
+        /* --- Footer --- */
+        .site-footer {
+            background-color: var(--footer-background);
+            color: var(--footer-text);
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--footer-text);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            color: var(--footer-text);
+            font-size: 1.3rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+        }
+
+        /* --- Basic Responsiveness (Example) --- */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .main-nav {
+                margin-top: 10px;
+            }
+            .user-actions {
+                margin-top: 10px;
+            }
+            .achievement-center-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .learning-path-container,
+            .video-cards-container {
+                justify-content: center;
+            }
+            .video-card {
+                width: 100%; /* Full width on smaller screens */
+                max-width: 400px; /* Limit max width */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">Skill Swap</div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Teachers</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <i class="fas fa-bell"></i>
+                <img src="../profile.jpg" alt="User Profile">
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Hero Section (Choose Your Learning Path) -->
+        <section class="hero-section">
+            <h2>Choose Your Learning Path</h2>
+            <div class="learning-path-container">
+                <div class="learning-path-card" data-path="lkg-ukg" onclick="window.location.href='../Lkg_ukg_video/index.html';"  >
+                    <i class="fas fa-child"></i>
+                    <h3>LKG - UKG</h3>
+                    <p>Ages 3-5</p>
+                </div>
+                <div class="learning-path-card" data-path="primary"  onclick="window.location.href='../primary_age_videos';"  >
+                    <i class="fas fa-user"></i>
+                    <h3>Primary</h3>
+                    <p>Ages 6-10</p>
+                </div>
+                <div class="learning-path-card" data-path="secondary" onclick="window.location.href='../secondary';" >
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Secondary</h3>
+                    <p>Ages 11-15</p>
+                </div>
+                <div class="learning-path-card" data-path="higher-education" onclick="window.location.href='../higher_school';">
+                    <i class="fas fa-university"></i>
+                    <h3>Higher Education</h3>
+                    <p>Ages 16+</p>
+                </div>
+                <div class="learning-path-card" data-path="skill-based" onclick="window.location.href='../skill_based';">
+                    <i class="fas fa-brain"></i>
+                    <h3>Skill-Based</h3>
+                    <p>All Ages</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Learning Videos Section -->
+        <section class="featured-videos-section">
+            <h2>Featured Learning Videos</h2>
+            <div class="video-cards-container">
+                <div class="video-card">
+                    <img src="../img.png" alt="Fun with Numbers">
+                    <div class="video-card-labels">
+                        <span class="video-card-label">Beginner</span>
+                    </div>
+                    <div class="play-button"><i class="fas fa-play"></i></div>
+                    <div class="video-card-content">
+                        <h3 class="video-card-title">Fun with Numbers</h3>
+                        <div class="video-card-info">
+                            <i class="fas fa-clock"></i> 20 mins
+                            <span class="video-card-rating">4.8 <i class="fas fa-star"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <img src="../div.png" alt="Chemistry Experiments">
+                    <div class="video-card-labels">
+                        <span class="video-card-label">Intermediate</span>
+                    </div>
+                    <div class="play-button"><i class="fas fa-play"></i></div>
+                    <div class="video-card-content">
+                        <h3 class="video-card-title">Chemistry Experiments</h3>
+                        <div class="video-card-info">
+                            <i class="fas fa-clock"></i> 35 mins
+                            <span class="video-card-rating">4.9 <i class="fas fa-star"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <img src="../img (2).png" alt="Coding Fundamentals">
+                    <div class="video-card-labels">
+                        <span class="video-card-label">Advanced</span>
+                    </div>
+                    <div class="play-button"><i class="fas fa-play"></i></div>
+                    <div class="video-card-content">
+                        <h3 class="video-card-title">Coding Fundamentals</h3>
+                        <div class="video-card-info">
+                            <i class="fas fa-clock"></i> 45 mins
+                            <span class="video-card-rating">4.7 <i class="fas fa-star"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Achievement Center Section -->
+        <section class="achievement-center-section">
+            <h2>Learning Achievement Center</h2>
+            <div class="achievement-center-container">
+                <div class="achievement-section">
+                    <h3>Top Learners</h3>
+                    <ul class="top-learners-list">
+                        <li class="top-learner-item">
+                            <img src="../profile.jpg" alt="Sarah K." class="top-learner-img">
+                            <span class="top-learner-name">Sarah K.</span>
+                            <span class="top-learner-points">2,450 pts</span>
+                        </li>
+                        <li class="top-learner-item">
+                            <img src="../" alt="Mike R." class="top-learner-img">
+                            <span class="top-learner-name">Mike R.</span>
+                            <span class="top-learner-points">2,280 pts</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="achievement-section">
+                    <h3>Recent Badges</h3>
+                    <div class="recent-badges-list">
+                        <i class="fas fa-brain badge-icon"></i>
+                        <i class="fas fa-fire badge-icon"></i>
+                        <i class="fas fa-star badge-icon"></i>
+                    </div>
+                </div>
+                <div class="achievement-section">
+                    <h3>Active Challenges</h3>
+                    <ul class="active-challenges-list">
+                        <li class="challenge-item">
+                            <span class="challenge-title">Math Marathon</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 70%;"></div>
+                            </div>
+                            <span>7/10 problems solved</span>
+                        </li>
+                        <li class="challenge-item">
+                            <span class="challenge-title">Science Quest</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 40%;"></div>
+                            </div>
+                            <span>2/5 experiments completed</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-logo">Skill Swap</div>
+            <p>Learning for all ages and stages</p>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Teachers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p class="copyright">© 2025 Skill Swap. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Learning Path Buttons
+            const learningPathCards = document.querySelectorAll('.learning-path-card');
+
+            learningPathCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Basic example: Change background color on click
+                    this.style.backgroundColor = '#D1C4E9'; // Light purple
+                    // You could also:
+                    // 1.  Scroll to a section:  window.scrollTo({ top: someSection.offsetTop, behavior: 'smooth' });
+                    // 2.  Navigate to a new page:  window.location.href = '/courses.html?path=' + this.dataset.path;
+                });
+            });
+
+            // Video Card Hover (example)
+            const videoCards = document.querySelectorAll('.video-card');
+            videoCards.forEach(card => {
+                card.addEventListener('mouseover', function() {
+                    this.style.boxShadow = '0 5px 10px rgba(0, 0, 0, 0.2)';
+                });
+                card.addEventListener('mouseout', function() {
+                    this.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

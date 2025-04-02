@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Swap - Learning for All Ages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #644ce4;
+            --secondary-color: #ffffff;
+            --text-dark: #333;
+            --border-color: #ddd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #eef2ff;
+            padding: 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--secondary-color);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .center-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .profile {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Video Section */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .search-bar {
+            width: 50%;
+            padding: 10px;
+            margin: 20px auto;
+            display: block;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #eef2ff;
+        }
+       
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .search-bar {
+            width: 50%;
+            padding: 10px;
+            margin: 20px auto;
+            display: block;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .video-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            width: 350px; /* Increased width */
+            height: 300px; /* Increased height */
+            overflow: hidden; /* Prevents content from overflowing */
+        }
+        .video-card img {
+            width: 100%;
+            height: 200px; /* Adjust image height */
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .video-card-labels {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .video-card-label {
+            background: #4a90e2;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        .video-card-content {
+            padding-top: 10px;
+        }
+        .video-card-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .video-card-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #555;
+        }
+        .video-card-rating {
+            color: #f39c12;
+        }
+        iframe {
+            width: 100%;
+            border-radius: 8px;
+        }
+        @media (max-width: 1024px) {
+            .video-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+      <nav class="navbar">
+        <div class="logo">SkillSwap</div>
+        <div class="center-text">High School</div>
+        <img src="../profile.jpg" alt="Profile" class="profile">
+    </nav>
+    <input type="text" id="search" class="search-bar" placeholder="Search videos..." onkeyup="filterVideos()">
+    <div class="container">
+        <div class="container">
+            <div id="videoContainer" class="video-grid">
+                <div class="video-card" data-title="calcus">
+                    <a href="https://www.youtube.com/watch?v=Kss13U-hvPk&pp=ygUIQ2FsY3VsdXPSBwkJvwCDtaTen9Q%3D" target="_blank">
+                        <img src="../calcus.png" alt="calcus">
+                    </a>
+                    <div class="video-card-labels">
+                        <span class="video-card-label">Advance</span>
+                    </div>
+                    <div class="video-card-content">
+                        <h3 class="video-card-title">Basic Arithmetic</h3>
+                        <div class="video-card-info">
+                            <i class="fas fa-clock"></i> 20 mins
+                            <span class="video-card-rating">4.8 <i class="fas fa-star"></i></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-card" data-title="Diffential equation">
+                    <a href="https://www.youtube.com/watch?v=6o7b9yyhH7k&pp=ygUWRGlmZmVyZW50aWFsIEVxdWF0aW9ucw%3D%3D" target="_blank">
+                        <img src="../diffrential.png" alt="Numbers 1 to 10">
+                    </a>
+                    <div class="video-card-labels">
+                        <span class="video-card-label">advance</span>
+                    </div>
+                    <div class="video-card-content">
+                        <h3 class="video-card-title">Diffrential Equation.</h3>
+                        <div class="video-card-info">
+                            <i class="fas fa-clock"></i> 15 mins
+                            <span class="video-card-rating">4.5 <i class="fas fa-star"></i></span>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="video-card" data-title="Organic Chemistry">
+                    <a href="https://www.youtube.com/watch?v=nP0gDV0xDLY&pp=ygURT3JnYW5pYyBDaGVtaXN0cnk%3D" target="_blank">
+                        <img src="../organic.png" alt="Rhymes Collection">
+                    </a>
+                    <div class="video-card-labels">
+                        <span class="video-card-label">Intermidate</span>
+                    </div>
+                    <div class="video-card-content">
+                        <h3 class="video-card-title">Organic Chemistry/h3>
+                        <div class="video-card-info">
+                            <i class="fas fa-clock"></i> 30 mins
+                            <span class="video-card-rating">4.9 <i class="fas fa-star"></i></span>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="video-card" data-title="World History">
+                    <a href="https://www.youtube.com/watch?v=UiXuBmBaNeA&pp=ygUNV29ybGQgSGlzdG9yeQ%3D%3D" target="_blank">
+                        <img src="../world.png" alt="drawing">
+                    </a>
+                    <div class="video-card-labels">
+                        <span class="video-card-label">Advance</span>
+                    </div>
+                    <div class="video-card-content">
+                        <h3 class="video-card-title">World History</h3>
+                        <div class="video-card-info">
+                            <i class="fas fa-clock"></i> 8 Hours
+                            <span class="video-card-rating">4.7 <i class="fas fa-star"></i></span>
+    </div>
+    
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        // JavaScript for button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Learning Path Buttons
+            const learningPathCards = document.querySelectorAll('.learning-path-card');
+
+            learningPathCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Basic example: Change background color on click
+                    this.style.backgroundColor = '#D1C4E9'; // Light purple
+                    // You could also:
+                    // 1.  Scroll to a section:  window.scrollTo({ top: someSection.offsetTop, behavior: 'smooth' });
+                    // 2.  Navigate to a new page:  window.location.href = '/courses.html?path=' + this.dataset.path;
+                });
+            });
+
+            // Video Card Hover (example)
+            const videoCards = document.querySelectorAll('.video-card');
+            videoCards.forEach(card => {
+                card.addEventListener('mouseover', function() {
+                    this.style.boxShadow = '0 5px 10px rgba(0, 0, 0, 0.2)';
+                });
+                card.addEventListener('mouseout', function() {
+                    this.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+ 
+
+ 
